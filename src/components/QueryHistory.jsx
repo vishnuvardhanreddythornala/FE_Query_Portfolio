@@ -145,15 +145,7 @@ const QueryHistory = () => {
               <div>
                 <div className="text-white">{q.text}</div>
                 <div className="text-xs text-slate-400">
-                  {new Date(q.time).toLocaleString("en-IN", {
-                    timeZone: "Asia/Kolkata",
-                    hour: "numeric",
-                    minute: "numeric",
-                    hour12: true,
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric",
-                  })}
+                  {new Date(q.time).toLocaleString()}
                 </div>
 
               </div>
@@ -170,4 +162,4 @@ const QueryHistory = () => {
   );
 };
 
-export default QueryHistory; 
+export default QueryHistory;
