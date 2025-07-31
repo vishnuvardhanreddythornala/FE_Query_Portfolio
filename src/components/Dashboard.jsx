@@ -49,7 +49,7 @@ const Dashboard = () => {
     };
     fetchMetrics();
   }, []);
-  
+
     //  Loader
   if (loading) {
     return (
@@ -100,11 +100,11 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-slate-900 text-white px-8 py-6">
+    <div className="min-h-screen w-full bg-slate-900 text-white px-4 sm:px-6 md:px-8 py-6 max-w-screen-xl mx-auto">
       {/*  Header */}
       <div className="mb-6 pt-4">
-        <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold">Welcome to the Dashboard!</h1>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+          <h1 className="text-2xl sm:text-3xl font-bold">Welcome to the Dashboard!</h1>
         </div>
       </div>
 
@@ -120,19 +120,19 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         {/* Line Chart */}
         <div className="bg-slate-800 p-4 rounded-xl shadow">
-          <h2 className="text-lg font-semibold mb-4 text-white">Portfolio Growth Trend</h2>
+          <h2 className="text-base sm:text-lg font-semibold mb-4 text-white">Portfolio Growth Trend</h2>
           <Line data={lineData} />
         </div>
 
         {/* Pie Chart */}
         <div className="bg-slate-800 p-4 rounded-xl shadow">
-          <h2 className="text-lg font-semibold mb-4 text-white">Asset Allocation</h2>
+          <h2 className="text-base sm:text-lg font-semibold mb-4 text-white">Asset Allocation</h2>
           <Pie data={pieData} />
         </div>
 
         {/* Bar Chart */}
         <div className="bg-slate-800 p-4 rounded-xl shadow md:col-span-2">
-          <h2 className="text-lg font-semibold mb-4 text-white">Top Relationship Managers</h2>
+          <h2 className="text-base sm:text-lg font-semibold mb-4 text-white">Top Relationship Managers</h2>
           <Bar data={barData} />
         </div>
       </div>
@@ -151,8 +151,8 @@ const StatCard = ({ title, value, color }) => {
 
   return (
     <div className="bg-slate-800 p-4 rounded-xl shadow hover:shadow-md transition">
-      <div className="font-medium text-slate-400">{title}</div>
-      <div className={`text-2xl font-bold ${valueClass}`}>{value}</div>
+      <div className="font-medium text-slate-400 text-sm sm:text-base">{title}</div>
+      <div className={`text-xl sm:text-2xl font-bold ${valueClass}`}>{value}</div>
     </div>
   );
 };
