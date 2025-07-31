@@ -50,13 +50,11 @@ const QueryHistory = () => {
 
   const handleExport = () => {
     window.open(`${import.meta.env.VITE_BACKEND_URL}/recent-queries/export`, "_blank");
-    
   };
 
   const handleFilter = async () => {
     if (!fromDate || !toDate) return;
     try {
-      
       const res = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/recent-queries/filter?start=${fromDate}&end=${toDate}`,
         {
@@ -67,9 +65,6 @@ const QueryHistory = () => {
           credentials: "include",
         }
       );
-
-
-
       const data = await res.json();
       setRecentQueries(data.queries);
     } catch (error) {
@@ -78,10 +73,10 @@ const QueryHistory = () => {
   };
 
   return (
-    <div className="p-6 bg-slate-900 min-h-screen text-white">
-      {/*  Header */}
+    <div className="p-4 sm:p-6 bg-slate-900 min-h-screen text-white">
+      {/* Header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold flex items-center gap-2">
+        <h1 className="text-xl sm:text-2xl font-bold flex items-center gap-2">
           <Clock size={22} className="text-blue-400" />
           Recent Queries
         </h1>
@@ -91,8 +86,8 @@ const QueryHistory = () => {
       </div>
 
       {/* Filter + Export */}
-      <div className="flex flex-wrap gap-4 mb-4 items-center">
-        <div className="flex gap-2 items-center">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+        <div className="flex flex-wrap gap-2 items-center">
           <CalendarDays size={18} />
           <input
             type="date"
@@ -114,9 +109,11 @@ const QueryHistory = () => {
             Filter
           </button>
         </div>
-        <div className="flex gap-3 ml-auto">
+
+        <div className="flex gap-3 justify-end">
           <button
             onClick={handleExport}
+            title="Download queries as CSV"
             className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-sm flex items-center gap-1"
           >
             <Download size={16} />
@@ -125,25 +122,25 @@ const QueryHistory = () => {
         </div>
       </div>
 
-      {/*  Query List */}
+      {/* Query List */}
       {recentQueries.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-slate-400">
           <img
             src="/no-queries.svg"
             alt="No Queries"
-            className="w-40 h-40 opacity-70 mb-4"
+            className="w-32 sm:w-40 h-32 sm:h-40 opacity-70 mb-4"
           />
-          <p className="italic">No recent queries yet.</p>
+          <p className="italic text-center">No recent queries yet.</p>
         </div>
       ) : (
         <div className="bg-slate-800 rounded-xl shadow divide-y divide-slate-700 max-h-[500px] overflow-y-auto">
           {recentQueries.map((q, idx) => (
             <div
               key={idx}
-              className="flex justify-between items-center py-3 px-4 hover:bg-slate-700 transition"
+              className="flex justify-between items-center py-3 px-4 hover:bg-slate-700 transition text-sm sm:text-base"
             >
-              <div>
-                <div className="text-white">{q.text}</div>
+              <div className="w-[80%]">
+                <div className="text-white break-words">{q.text}</div>
                 <div className="text-xs text-slate-400">{q.time}</div>
               </div>
               <Trash

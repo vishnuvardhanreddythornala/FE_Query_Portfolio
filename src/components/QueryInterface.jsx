@@ -28,7 +28,7 @@ const QueryInterface = () => {
   } = useContext(QueryContext);
 
   const [showSamples, setShowSamples] = useState(true);
-  const [loading, setLoading] = useState(false); // spinner state
+  const [loading, setLoading] = useState(false);
 
   const sampleQuestions = [
     "What are the top five portfolios?",
@@ -49,7 +49,7 @@ const QueryInterface = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question }),
-          credentials: "include",
+        credentials: "include",
       });
 
       const data = await res.json();
@@ -77,12 +77,12 @@ const QueryInterface = () => {
   };
 
   return (
-    <div className="pt-16 px-8 pb-8 min-h-screen bg-slate-900 text-white">
+    <div className="pt-16 px-4 md:px-8 pb-8 min-h-screen bg-slate-900 text-white">
       {/* Header */}
-      <div className="mb-14 text-center">
-        <div className="flex justify-center items-center gap-2 mb-1">
-          <h1 className="text-3xl font-bold">⚡AI-Powered Query Interface</h1>
-        </div>
+      <div className="mb-12 text-center">
+        <h1 className="text-2xl md:text-3xl font-bold mb-1">
+          ⚡AI-Powered Query Interface
+        </h1>
         <p className="text-slate-400 text-sm">
           Natural language queries for intelligent portfolio analysis
         </p>
@@ -91,13 +91,13 @@ const QueryInterface = () => {
       {/* Input Box */}
       <form
         onSubmit={handleSubmit}
-        className="bg-slate-800 rounded-xl p-4 flex items-center gap-3 mb-6"
+        className="bg-slate-800 rounded-xl p-4 flex flex-col md:flex-row items-stretch md:items-center gap-3 mb-6"
       >
         <textarea
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="Ask me anything about your portfolios, clients, or transactions..."
-          className="flex-1 bg-transparent text-white resize-none focus:outline-none h-20"
+          className="flex-1 bg-transparent text-white resize-none focus:outline-none h-24 md:h-20 w-full md:w-auto"
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
@@ -106,31 +106,33 @@ const QueryInterface = () => {
           }}
         />
 
-        <button
-          type="button"
-          className="p-2 hover:bg-slate-700 rounded-full"
-          title="Voice (not implemented)"
-        >
-          <Mic className="text-slate-400" />
-        </button>
+        <div className="flex items-center gap-2 md:gap-3">
+          <button
+            type="button"
+            className="p-2 hover:bg-slate-700 rounded-full"
+            title="Voice (not implemented)"
+          >
+            <Mic className="text-slate-400" />
+          </button>
 
-        <button
-          type="submit"
-          className="p-2 bg-blue-600 hover:bg-blue-700 rounded-full"
-          title="Submit"
-        >
-          <Send className="text-white" />
-        </button>
+          <button
+            type="submit"
+            className="p-2 bg-blue-600 hover:bg-blue-700 rounded-full"
+            title="Submit"
+          >
+            <Send className="text-white" />
+          </button>
 
-        {loading && (
-          <div className="ml-2">
-            <div className="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-          </div>
-        )}
+          {loading && (
+            <div className="ml-2">
+              <div className="w-5 h-5 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          )}
+        </div>
       </form>
 
       {/* Tabs */}
-      <div className="flex space-x-4 mb-6">
+      <div className="flex flex-wrap gap-3 mb-6">
         {["text", "table", "graph"].map((tab) => (
           <button
             key={tab}
@@ -146,7 +148,7 @@ const QueryInterface = () => {
         ))}
       </div>
 
-      {/* Sample Questions BELOW tabs */}
+      {/* Sample Questions */}
       {showSamples && (
         <div className="bg-slate-800 p-4 rounded-xl mb-6">
           <h2 className="text-lg font-semibold mb-4">💡 Sample Questions</h2>
@@ -168,7 +170,9 @@ const QueryInterface = () => {
       {activeTab === "text" && response && (
         <div className="mb-6 p-4 bg-slate-800 rounded-xl shadow">
           <h2 className="text-lg font-semibold mb-2">Response</h2>
-          <p className="text-slate-300 whitespace-pre-line">{response}</p>
+          <p className="text-slate-300 whitespace-pre-line break-words">
+            {response}
+          </p>
         </div>
       )}
 
@@ -200,7 +204,7 @@ const QueryInterface = () => {
 
       {/* Graph Response */}
       {activeTab === "graph" && graphData.length > 0 && (
-        <div className="mb-6 p-4 bg-slate-800 rounded-xl shadow">
+        <div className="mb-6 p-4 bg-slate-800 rounded-xl shadow overflow-x-auto">
           <h2 className="text-lg font-semibold mb-4">Graph</h2>
           <Bar data={barChartData} />
         </div>

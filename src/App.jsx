@@ -13,7 +13,7 @@ const App = () => {
       <Router>
         <div className="flex bg-[#0f172a] min-h-screen text-white">
           <Sidebar />
-          <div className="ml-64 flex-1">
+          <div className="ml-16 md:ml-64 flex-1 transition-all duration-300">
             <main className="relative">
               <Routes>
                 {/*  Wrap TopHeader ONLY in this route */}
