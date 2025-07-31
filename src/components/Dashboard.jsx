@@ -25,6 +25,7 @@ ChartJS.register(
 
 const Dashboard = () => {
   const [metrics, setMetrics] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMetrics = async () => {
@@ -39,12 +40,27 @@ const Dashboard = () => {
 
         const data = await res.json();
         setMetrics(data);
+        setLoading(false);
+
       } catch (error) {
         console.error("Error fetching metrics:", error);
+        setLoading(false);  //  stop loader even on error
       }
     };
     fetchMetrics();
   }, []);
+  
+    //  Loader
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-slate-900 text-white">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-400 border-solid"></div>
+          <p className="text-lg text-white">Loading dashboard data...</p>
+        </div>
+      </div>
+    );
+  }
 
   //  Line Chart data (Portfolio Growth)
   const lineData = {
@@ -142,4 +158,3 @@ const StatCard = ({ title, value, color }) => {
 };
 
 export default Dashboard;
-3
