@@ -145,7 +145,10 @@ const QueryHistory = () => {
               <div>
                 <div className="text-white">{q.text}</div>
                 <div className="text-xs text-slate-400">
-                  {new Date(q.time).toLocaleString()}
+                  {(() => {
+                    const parsed = new Date(q.time);
+                    return isNaN(parsed.getTime()) ? "Invalid date" : parsed.toLocaleString("en-IN");
+                  })()}
                 </div>
 
               </div>
