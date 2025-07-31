@@ -92,7 +92,7 @@ const QueryHistory = () => {
 
       {/* Filter + Export */}
       <div className="flex flex-wrap gap-4 mb-4 items-center">
-        <div className="flex flex-wrap gap-2 items-center w-full sm:w-auto">
+        <div className="flex gap-2 items-center">
           <CalendarDays size={18} />
           <input
             type="date"
@@ -117,7 +117,6 @@ const QueryHistory = () => {
         <div className="flex gap-3 ml-auto">
           <button
             onClick={handleExport}
-            title="Download queries as CSV"
             className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-sm flex items-center gap-1"
           >
             <Download size={16} />
