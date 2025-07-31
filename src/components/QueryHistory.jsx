@@ -159,4 +159,4 @@ const QueryHistory = () => {
   );
 };
 
-export default QueryHistory;
+export default QueryHistory; 
